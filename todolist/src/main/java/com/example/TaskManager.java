@@ -17,14 +17,23 @@ public class TaskManager {
                 String message = rs.getString("messages");
                 Task task = new Task(id, message);
                 tasks.add(task);
-                
-
             }
             return tasks;
 
         } catch (Exception e) {
-            System.out.println("ERR: "+e.getMessage());
+            System.out.println("ERR: " + e.getMessage());
             return null;
+        }
+    }
+
+    public void addTask(String message) {
+        try {
+            Statement st = getStatement();
+            String sql = "INSERT INTO tasks(messages) VALUES('" + message + "')";
+            st.executeUpdate(sql);
+
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
         }
     }
 
