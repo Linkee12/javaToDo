@@ -17,6 +17,7 @@ public class TaskManager {
                 String message = rs.getString("messages");
                 Task task = new Task(id, message);
                 tasks.add(task);
+                
 
             }
             return tasks;
