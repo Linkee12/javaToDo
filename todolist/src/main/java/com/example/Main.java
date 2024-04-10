@@ -26,7 +26,9 @@ public class Main {
                         tm.addTask(newTask);
                         break ;
                     case 1:
-
+                        System.out.println("Id: ");
+                        int id=sc.nextInt();
+                        tm.deleteTask(id);
                         break;
                     case 2:
 

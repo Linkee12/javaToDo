@@ -37,6 +37,16 @@ public class TaskManager {
         }
     }
 
+    public void deleteTask(int id){
+        try {
+            Statement st=getStatement();
+            String sql="DELETE FROM tasks WHERE id="+id;
+            st.executeUpdate(sql);
+        } catch (Exception e) {
+            System.out.println("Err: "+e.getMessage());
+        }
+    }
+
     private Statement getStatement() throws SQLException {
         Connection connection = DriverManager.getConnection(URL);
         Statement st = connection.createStatement();
