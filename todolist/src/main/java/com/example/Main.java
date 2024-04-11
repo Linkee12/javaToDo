@@ -9,10 +9,11 @@ public class Main {
         TaskManager tm = new TaskManager();
         Scanner sc = new Scanner(System.in);
         int menu = 5;
+        System.out.println("-----------------------------------------------------");
         do {
             List<Task> tasks = tm.getAllTasks();
-            for (Object e : tasks) {
-                System.out.println(e);
+            for (int i = 0; i < tasks.size(); i++) {
+                System.out.println(i+1+": "+tasks.get(i).getMessage());
             }
             System.out.println("-----------------------------------------------------");
             System.out.println("Menu: 0: Add, 1: Remove, 2: Edit, 3: Exit");
@@ -24,21 +25,21 @@ public class Main {
                         System.out.println("Add task: ");
                         String newTask = sc.nextLine();
                         tm.addTask(newTask);
-                        break ;
+                        break;
                     case 1:
                         System.out.println("Id: ");
-                        int id=sc.nextInt();
-                        tm.deleteTask(id);
+                        int id = sc.nextInt()-1;
+                        tm.deleteTask(tasks.get(id).getId());
                         break;
                     case 2:
 
                         break;
                 }
             } catch (Exception e) {
-                System.out.println("Please set number!!");
+                System.out.println("Please set number!!"+e.getMessage());
             }
-        } while (menu!=3);
-
+        } while (menu != 3);
+        sc.close();
     }
 
 }

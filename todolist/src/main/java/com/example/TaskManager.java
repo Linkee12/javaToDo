@@ -6,18 +6,24 @@ import java.util.List;
 
 public class TaskManager {
     private final String URL = "jdbc:sqlite:tasks.db";
+    private int tasknumber;
+
+   
 
     public List<Task> getAllTasks() {
+        tasknumber=0;
         try {
-            Statement st = getStatement();
             List<Task> tasks = new ArrayList<>();
+            Statement st = getStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM tasks");
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String message = rs.getString("messages");
                 Task task = new Task(id, message);
                 tasks.add(task);
+                tasknumber++;
             }
+            tasknumber+=1;
             return tasks;
 
         } catch (Exception e) {
@@ -28,7 +34,9 @@ public class TaskManager {
 
     public void addTask(String message) {
         try {
+
             Statement st = getStatement();
+
             String sql = "INSERT INTO tasks(messages) VALUES('" + message + "')";
             st.executeUpdate(sql);
 
@@ -37,14 +45,18 @@ public class TaskManager {
         }
     }
 
-    public void deleteTask(int id){
+    public void deleteTask(int id) {
         try {
-            Statement st=getStatement();
-            String sql="DELETE FROM tasks WHERE id="+id;
+            Statement st = getStatement();
+            String sql = "DELETE FROM tasks WHERE id=" + id;
             st.executeUpdate(sql);
         } catch (Exception e) {
-            System.out.println("Err: "+e.getMessage());
+            System.out.println("Err: " + e.getMessage());
         }
+    }
+
+    public int getTasknumber() {
+        return tasknumber;
     }
 
     private Statement getStatement() throws SQLException {
