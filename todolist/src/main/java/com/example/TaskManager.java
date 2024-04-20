@@ -4,6 +4,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.plaf.nimbus.State;
+
 public class TaskManager {
     private final String URL = "jdbc:sqlite:tasks.db";
     private int tasknumber;
@@ -13,7 +15,7 @@ public class TaskManager {
     public List<Task> getAllTasks() {
         tasknumber=0;
         try {
-            List<Task> tasks = new ArrayList<>();
+            ArrayList<Task> tasks = new ArrayList<Task>();
             Statement st = getStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM tasks");
             while (rs.next()) {
@@ -57,6 +59,17 @@ public class TaskManager {
 
     public int getTasknumber() {
         return tasknumber;
+    }
+    public void editTask(int id,String newMessages) {
+        try {
+            Statement st=getStatement();
+            String sql="UPDATE tasks SET messages= '"+newMessages+"'WHERE id="+id;
+            st.executeUpdate(sql);
+        } catch (Exception e) {
+            System.out.println("Err: "+e.getMessage());
+        }
+
+
     }
 
     private Statement getStatement() throws SQLException {

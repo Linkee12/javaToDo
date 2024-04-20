@@ -32,6 +32,13 @@ public class Main {
                         tm.deleteTask(tasks.get(id).getId());
                         break;
                     case 2:
+                        System.out.println("Id: ");
+                        id=sc.nextInt()-1;
+                        System.out.println("New task");
+                        sc.nextLine();
+                        String newMessage=sc.nextLine();
+                        
+                        tm.editTask(tasks.get(id).getId(),newMessage);
 
                         break;
                 }
